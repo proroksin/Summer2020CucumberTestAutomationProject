@@ -1,3 +1,4 @@
+
 package com.vytrack.runners;
 
 
@@ -9,7 +10,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com/vytrack/step_definitions",
-        dryRun = true,
+        dryRun = false,
         tags = "@calendar_events",
         publish = true
 )
