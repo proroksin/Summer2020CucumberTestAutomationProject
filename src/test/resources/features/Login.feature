@@ -14,6 +14,14 @@ Feature: As user I want to be able to login under different roles
   Scenario: Parametrized login
     When user logs in as a "store manager"
     Then user should see dashboard page
+
+  @parametrized_test @smoke_test
+  Scenario: Parametrized login
+    When user logs in as a "sales manager"
+    Then user should see dashboard page
+
+
+
 #"driver" - is a parameter. "" allows to do test parametrization which helps to re-use test steps
 
   @negative_login
