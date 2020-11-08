@@ -28,15 +28,16 @@ public class Driver {
                     break;
                 case "remote-chrome":
                     try {
-                        //ChromeOptions chromeOptions = new ChromeOptions();
+//                    ChromeOptions chromeOptions = new ChromeOptions();
                         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
                         desiredCapabilities.setBrowserName("chrome");
-                        URL gridUrl = new URL("http://107.21.84.195:4444/wd/hub");
+                        URL gridUrl = new URL("http://3.82.5.142:4444/wd/hub");
                         driver = new RemoteWebDriver(gridUrl, desiredCapabilities);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    default:
+                    break;
+                default:
                     throw new RuntimeException("No such a browser yet!");
             }
         }

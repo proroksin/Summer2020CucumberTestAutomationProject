@@ -1,3 +1,4 @@
+
 @login
 Feature: As user I want to be able to login under different roles
 # this is a comment
@@ -6,6 +7,7 @@ Feature: As user I want to be able to login under different roles
   Background: common steps
     Given user is on the login page
 
+  @smoke
   Scenario: Login as a sales manger
     When user logs in
     Then user should see dashboard page
@@ -48,7 +50,7 @@ Feature: As user I want to be able to login under different roles
 # auto-formatting on windows: control + alt + L
 #"driver" - is a parameter. "" allows to do test parametrization which helps to re-use test steps
 
-  @negative_login
+  @negative_login @smoke
   Scenario: Invalid password
     When user logs in with "storemanager85" username and "wrong" password
     Then user verifies that "Invalid user name or password." message is displayed
@@ -60,7 +62,8 @@ Feature: As user I want to be able to login under different roles
 
     Examples: data set
       | username | password | message                        |
-      | wrong       | bad      | Invalid user name or password. |
-      | wrong213    | bad      | Invalid user name or password. |
-      | wrong32     | bad      | Invalid user name or password. |
-      | wrong12     | bad      | Invalid user name or password. |
+      | wrong    | bad      | Invalid user name or password. |
+      | wrong213 | bad      | Invalid user name or password. |
+      | wrong32  | bad      | Invalid user name or password. |
+      | wrong12  | bad      | Invalid user name or password. |
+
