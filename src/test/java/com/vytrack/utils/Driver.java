@@ -1,5 +1,4 @@
 package com.vytrack.utils;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,22 +7,20 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
-
 public class Driver {
     private static WebDriver driver;
-
-    private Driver() {}
-
+    private Driver() {
+    }
     public static WebDriver getDriver() {
         if (driver == null) {
             String browser = ConfigurationReader.getProperty("browser");
-//          test -Dcucumber.filter.tags="@smoke" -Dbrowser="chrome"
-//          custom environment variables: -Dbrowser
-//          -Dproperty = then read in java System.getProperty("property")
-//          if env variable was specified
-            if(System.getProperty("browser")!=null){
-//          then change browser type
-//          regardless on value configuration.properties
+//            jenkins command: test -Dcucumber.filter.tags="@smoke" -Dbrowser="chrome"
+//            custom environment variables: -Dbrowser
+//            -Dproperty  = then read in java System.getProperty("property")
+//            if env variable was specified
+            if (System.getProperty("browser") != null) {
+//                then change browser type
+//                regardless on value configuration.properties
                 System.out.println("Browser type was changed to: " + System.getProperty("browser"));
                 browser = System.getProperty("browser");
             }
@@ -43,7 +40,17 @@ public class Driver {
                         desiredCapabilities.setBrowserName("chrome");
                         URL gridUrl = new URL("http://3.82.5.142:4444/wd/hub");
                         driver = new RemoteWebDriver(gridUrl, desiredCapabilities);
-                    }catch (Exception e){
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "remote-firefox":
+                    try {
+                        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+                        desiredCapabilities.setBrowserName("firefox");
+                        URL gridUrl = new URL("http://3.82.5.142:4444/wd/hub");
+                        driver = new RemoteWebDriver(gridUrl, desiredCapabilities);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
@@ -53,7 +60,6 @@ public class Driver {
         }
         return driver;
     }
-
     public static void closeDriver() {
         if (driver != null) {
             driver.quit();
