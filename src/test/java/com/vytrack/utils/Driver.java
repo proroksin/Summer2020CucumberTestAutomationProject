@@ -9,12 +9,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.URL;
 public class Driver {
     private static ThreadLocal<WebDriver> driverPool = new ThreadLocal<>();
-
     private Driver() { }
-
     public static WebDriver getDriver() {
         if (driverPool.get() == null) {
-            // it will make that 2 threads cannot access this piece of code at the same time
+            //it will make that 2 threads cannot access this piece of code at the same time
             //only 1 thread at the time
             synchronized (Driver.class) {
                 String browser = ConfigurationReader.getProperty("browser");
@@ -66,9 +64,9 @@ public class Driver {
         return driverPool.get();
     }
     public static void closeDriver() {
-        if (driverPool.get()!= null) {
+        if (driverPool.get() != null) {
             driverPool.get().quit();
-            driverPool = null;
+            driverPool.remove();
         }
     }
 }
