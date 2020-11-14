@@ -1,4 +1,3 @@
-
 package com.vytrack.utils;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +20,10 @@ public class BrowserUtils {
         wait.until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
+    /**
+     * Method to click with a javascript
+     * @param element target web element
+     */
     public static void clickWithJS(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         ((JavascriptExecutor) (Driver.getDriver())).executeScript("arguments[0].click()", element);
@@ -30,7 +33,8 @@ public class BrowserUtils {
         wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
         element.sendKeys(text);
-        wait.until(ExpectedConditions.attributeToBe(element, "value", text));
+//        wait.until(ExpectedConditions.attributeToBe(element, "value", text));
+        BrowserUtils.wait(1);
         System.out.println("Entering text: " + text);
     }
 
